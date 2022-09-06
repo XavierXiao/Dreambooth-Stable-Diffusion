@@ -71,4 +71,13 @@ Generated images with prompt ```photo of a sks container on the moon```:
 
 ![](assets/photo-of-a-sks-container-on-the-moon-0016.jpg)
 
+Some not-so-perfect but still interesting results:
+
+Generated images with prompt ```photo of a red sks container```:
+
+![](assets/a-red-sks-container-0021.jpg)
+
+Generated images with prompt ```a dog on top of sks container```:
+
+![](assets/a-dog-on-top-of-sks-container-0023.jpg)
 
