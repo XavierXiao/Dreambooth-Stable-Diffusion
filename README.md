@@ -7,3 +7,5 @@ This code repository is based on that of [Textual Inversion](https://github.com/
 The implementation makes minimum changes over the official codebase of Textual Inversion, and in fact some components in Textual Inversion, such as the embedding manager, are not deleted, although they will never be used here.
 
 ## Usage
+
+### Preparation
