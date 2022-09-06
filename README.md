@@ -37,5 +37,19 @@ Detailed configuration can be found in ```configs/stable-diffusion/v1-finetune_u
 
 Dreambooth requires a placeholder word ```[V]```, called identifier, as in the paper. This identifier needs to be a relatively rare tokens in the vocabulary. The original paper approaches this by using a rare word in T5-XXL tokenizer. For simplicity, here I just use a random word ```sks``` and hard coded it.. If you want to change that, simply make a change in [this file](https://github.com/XavierXiao/Dreambooth-Stable-Diffusion/blob/main/ldm/data/personalized.py#L10).
 
-Training will be run for 800 steps, and two checkpoints will be saved, one at 500 steps and one at final step. Typically the one at 500 steps works well enough. I train the model use two A6000 GPUs and it takes ~15 mins.
+Training will be run for 800 steps, and two checkpoints will be saved at ```./logs/<job_name>/checkpoints```, one at 500 steps and one at final step. Typically the one at 500 steps works well enough. I train the model use two A6000 GPUs and it takes ~15 mins.
+
 ### Generation
+After training, personalized samples can be obtained by running the command
+
+```
+python scripts/stable_txt2img.py --ddim_eta 0.0 
+                                 --n_samples 8 
+                                 --n_iter 1 
+                                 --scale 10.0 
+                                 --ddim_steps 100  
+                                 --ckpt /path/to/saved/checkpoint/from/training
+                                 --prompt "photo of a sks <class>" 
+```
+
+In particular, ```sks``` is the identifier, which should be replaced by your choice if you happen to change the identifier, and ```<class>``` is the class word ```--class_word``` for training.
