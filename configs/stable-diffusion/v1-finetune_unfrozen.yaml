@@ -1,5 +1,5 @@
 model:
-  base_learning_rate: 1.0e-05
+  base_learning_rate: 1.0e-06
   target: ldm.models.diffusion.ddpm.LatentDiffusion
   params:
     reg_weight: 1.0
@@ -19,7 +19,7 @@ model:
     use_ema: False
     embedding_reg_weight: 0.0
     unfreeze_model: True
-    model_lr: 1.0e-5
+    model_lr: 1.0e-6
 
     personalization_config:
       target: ldm.modules.embedding_manager.EmbeddingManager
