@@ -33,4 +33,7 @@ python main.py --base configs/stable-diffusion/v1-finetune_unfrozen.yaml
                 --class_word <xxx>
 ```
 
+Detailed configuration can be found in configs/stable-diffusion/v1-finetune_unfrozen.yaml. In particular, the default learning rate is ```1.0e-6``` as I found the ```1.0e-5``` in the Dreambooth paper leads to poor editability. The parameter ```reg_weight``` corresponds to the weight of regularization in the Dreambooth paper, and the default is set to ```1.0```.
+
+
 ### Generation
