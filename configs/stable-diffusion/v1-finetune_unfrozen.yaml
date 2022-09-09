@@ -93,7 +93,7 @@ data:
         set: train
         reg: true
         per_image_tokens: false
-        repeats: 100
+        repeats: 10
         
     validation:
       target: ldm.data.personalized.PersonalizedBase
