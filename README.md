@@ -1,4 +1,36 @@
-# Dreambooth on Stable Diffusion
+# "Dreambooth" on Stable Diffusion
+
+## Notes by Joe Penna
+### **WARNINGS!**
+- Unfreezing the model takes a lot of juice.
+  - You're gonna need an A6000 / A40 / A100 (or similar top-of-the-line thousands-of-dollars GPU).
+  - If, like myself, you don't happen to own one of those, I'm including a Jupyter notebook here to help you run it on a rented cloud computing platform. 
+  - It's currently tailored to [runpod.io](https://runpod.io?ref=n8yfwyum), but can work on vast.ai / etc.
+  
+- This implementation does not fully implement Google's ideas on how to preserve the latent space.
+
+  - Most images that are similar to what you're training will be shifted towards that.
+  - e.g. If you're training a person, all people will look like you. If you're trianing an object, anything in that class will look like your object.
+
+- There doesn't seem to be an easy way to train two subjects consecutively. You will end up with an 11-12GB.
+  - I'm currently testing ways of compressing that down to ~2GB.
+  
+- You might have better luck training with `sd-v1-4-full-ema.ckpt`
+  - However, it's huge and it's annoying.
+  
+# RunPod Instructions
+- Sign up for RunPod. Feel free to use my [referral code here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
+- Click **Deploy** on either `SECURE CLOUD` or `COMMUNITY CLOUD`
+- Click `Select` on a GPU with at least 35 GB of VRAM (e.g. A100, A40, A6000, etc)
+- Select a template > `Runpod / Stable Diffusion`
+- Click `Connect` and choose `Jupyter Lab`
+- Make a new notebook (it's just like Google Colab) and run the code below
+```python
+!git clone https://github.com/JoePenna/Dreambooth-Stable-Diffusion/
+```
+- With the file navigator on the left, `/workspace/Dreambooth-Stable-Diffusion/dreambooth_runpod_joepenna.ipynb` -- follow the instructions in there.
+
+# Original Readme from XavierXiao
 
 This is an implementtaion of Google's [Dreambooth](https://arxiv.org/abs/2208.12242) with [Stable Diffusion](https://github.com/CompVis/stable-diffusion). The original Dreambooth is based on [Imagen](https://imagen.research.google/) text-to-image model. However, neither the model nor the pre-trained weights of Imagen is available. To enable people to fine-tune a text-to-image model with a few examples, I implemented the idea of Dreambooth on Stable diffusion.
 
