@@ -359,7 +359,7 @@ class SetupCallback(Callback):
 
 
 class ImageLogger(Callback):
-    def __init__(self, batch_frequency, max_images, clamp=True, increase_log_steps=True,
+    def __init__(self, batch_frequency, max_images, clamp=False, increase_log_steps=True,
                  rescale=True, disabled=False, log_on_batch_idx=False, log_first_step=False,
                  log_images_kwargs=None):
         super().__init__()
@@ -453,6 +453,7 @@ class ImageLogger(Callback):
         return False
 
     def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx):
+        pass
         if not self.disabled and (pl_module.global_step > 0 or self.log_first_step):
             self.log_img(pl_module, batch, batch_idx, split="train")
 
@@ -716,7 +717,7 @@ if __name__ == "__main__":
                 "params": {
                     "batch_frequency": 750,
                     "max_images": 4,
-                    "clamp": True
+                    "clamp": False 
                 }
             },
             "learning_rate_logger": {
