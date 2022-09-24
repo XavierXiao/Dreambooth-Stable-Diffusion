@@ -717,7 +717,8 @@ if __name__ == "__main__":
                 "params": {
                     "batch_frequency": 750,
                     "max_images": 4,
-                    "clamp": False 
+                    "clamp": False,
+                    "disabled": True,
                 }
             },
             "learning_rate_logger": {
