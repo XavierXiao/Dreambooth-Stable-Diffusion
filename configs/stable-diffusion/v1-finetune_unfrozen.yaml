@@ -118,3 +118,4 @@ lightning:
   trainer:
     benchmark: True
     max_steps: 800
+    precision: 16

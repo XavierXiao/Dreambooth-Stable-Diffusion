@@ -1,0 +1,6 @@
+
+src
+*.egg-info
+*/**/__pycache__
+outputs
+train.bat
