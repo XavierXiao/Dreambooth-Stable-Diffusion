@@ -1,6 +1,9 @@
 
 src
 *.egg-info
+__pycache__
 */**/__pycache__
 outputs
 train.bat
+logs
+gen.bat
