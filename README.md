@@ -19,7 +19,7 @@
   - However, it's huge and it's annoying.
   
 # RunPod Instructions
-- Sign up for RunPod. Feel free to use my [referral code here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
+- Sign up for RunPod. Feel free to use my [referral link here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
 - Click **Deploy** on either `SECURE CLOUD` or `COMMUNITY CLOUD`
 - Click `Select` on a GPU with at least 35 GB of VRAM (e.g. A100, A40, A6000, etc)
 - Select a template > `Runpod / Stable Diffusion`
