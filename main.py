@@ -832,8 +832,8 @@ if __name__ == "__main__":
         # run
         if opt.train:
             try:
-                with autocast('cuda'):
-                    trainer.fit(model, data)
+#                with autocast('cuda'):
+                 trainer.fit(model, data)
             except Exception:
                 melk()
                 raise

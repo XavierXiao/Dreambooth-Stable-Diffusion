@@ -111,11 +111,11 @@ lightning:
     image_logger:
       target: main.ImageLogger
       params:
-        batch_frequency: 100
+        batch_frequency: 200
         max_images: 8
         increase_log_steps: False
 
   trainer:
     benchmark: True
     max_steps: 800
-    precision: 16
+#    precision: 'bf16'
