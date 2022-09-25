@@ -1,2 +1,5 @@
 
 .DS_Store
+gen.bat
+gen_ref.bat
+train.bat
