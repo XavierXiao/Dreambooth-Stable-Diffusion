@@ -273,6 +273,7 @@ class DataModuleFromConfig(pl.LightningDataModule):
         reg_set = self.datasets["reg"]
         concat_dataset = ConcatDataset(train_set, reg_set)
         return DataLoader(concat_dataset, batch_size=self.batch_size,
+                          pin_memory=False,
                           num_workers=self.num_workers, shuffle=False if is_iterable_dataset else True,
                           worker_init_fn=init_fn)
 
@@ -359,7 +360,7 @@ class SetupCallback(Callback):
 
 
 class ImageLogger(Callback):
-    def __init__(self, batch_frequency, max_images, clamp=False, increase_log_steps=True,
+    def __init__(self, batch_frequency, max_images, clamp=True, increase_log_steps=True,
                  rescale=True, disabled=False, log_on_batch_idx=False, log_first_step=False,
                  log_images_kwargs=None):
         super().__init__()
@@ -428,9 +429,9 @@ class ImageLogger(Callback):
                 N = min(images[k].shape[0], self.max_images)
                 images[k] = images[k][:N]
                 if isinstance(images[k], torch.Tensor):
-                    images[k] = images[k].detach().cpu()
                     if self.clamp:
                         images[k] = torch.clamp(images[k], -1., 1.)
+                    images[k] = images[k].detach().cpu()
 
             self.log_local(pl_module.logger.save_dir, split, images,
                            pl_module.global_step, pl_module.current_epoch, batch_idx)
@@ -717,8 +718,7 @@ if __name__ == "__main__":
                 "params": {
                     "batch_frequency": 750,
                     "max_images": 4,
-                    "clamp": False,
-                    "disabled": True,
+                    "clamp": True,
                 }
             },
             "learning_rate_logger": {
@@ -838,7 +838,8 @@ if __name__ == "__main__":
                 melk()
                 raise
         if not opt.no_test and not trainer.interrupted:
-            trainer.test(model, data)
+            pass
+            #trainer.test(model, data)
     except Exception:
         if opt.debug and trainer.global_rank == 0:
             try:
