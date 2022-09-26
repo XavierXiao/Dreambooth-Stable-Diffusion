@@ -21,6 +21,9 @@ from pytorch_lightning.utilities import rank_zero_info
 from ldm.data.base import Txt2ImgIterableBaseDataset
 from ldm.util import instantiate_from_config
 
+## Un-comment this for windows
+## os.environ["PL_TORCH_DISTRIBUTED_BACKEND"] = "gloo"
+
 def load_model_from_config(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
     pl_sd = torch.load(ckpt, map_location="cpu")
@@ -139,12 +142,19 @@ def get_parser(**parser_kwargs):
     )
 
     parser.add_argument(
-        "--datadir_in_name", 
-        type=str2bool, 
-        nargs="?", 
-        const=True, 
-        default=True, 
+        "--datadir_in_name",
+        type=str2bool,
+        nargs="?",
+        const=True,
+        default=True,
         help="Prepend the final directory in the data_root to the output directory name")
+
+    parser.add_argument(
+        "--batch_size",
+        type=int,
+        required=True,
+        default=1000,
+        help="Number of iterations to run")
 
     parser.add_argument("--actual_resume", 
         type=str,
@@ -605,8 +615,13 @@ if __name__ == "__main__":
         cli = OmegaConf.from_dotlist(unknown)
         config = OmegaConf.merge(*configs, cli)
         lightning_config = config.pop("lightning", OmegaConf.create())
+
         # merge trainer cli with config
         trainer_config = lightning_config.get("trainer", OmegaConf.create())
+
+        # Set the steps
+        trainer_config.max_steps = opt.batch_size
+
         for k in nondefault_trainer_args(opt):
             trainer_config[k] = getattr(opt, k)
         if not "gpus" in trainer_config:
@@ -734,12 +749,11 @@ if __name__ == "__main__":
             callbacks_cfg = OmegaConf.create()
 
         if 'metrics_over_trainsteps_checkpoint' in callbacks_cfg:
-            print(
-                'Caution: Saving checkpoints every n train steps without deleting. This might require some free space.')
+            print('Caution: Saving checkpoints every n train steps without deleting. This might require some free space.')
             default_metrics_over_trainsteps_ckpt_dict = {
-                'metrics_over_trainsteps_checkpoint':
-                    {"target": 'pytorch_lightning.callbacks.ModelCheckpoint',
-                     'params': {
+                'metrics_over_trainsteps_checkpoint': {
+                    "target": 'pytorch_lightning.callbacks.ModelCheckpoint',
+                    'params': {
                          "dirpath": os.path.join(ckptdir, 'trainstep_checkpoints'),
                          "filename": "{epoch:06}-{step:09}",
                          "verbose": True,
@@ -747,8 +761,9 @@ if __name__ == "__main__":
                          'every_n_train_steps': 10000,
                          'save_weights_only': True
                      }
-                     }
+                }
             }
+
             default_callbacks_cfg.update(default_metrics_over_trainsteps_ckpt_dict)
 
         callbacks_cfg = OmegaConf.merge(default_callbacks_cfg, callbacks_cfg)
