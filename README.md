@@ -4,7 +4,7 @@
 ### **WARNINGS!**
 - Unfreezing the model takes a lot of juice.
   - ~~You're gonna need an A6000 / A40 / A100 (or similar top-of-the-line thousands-of-dollars GPU).~~
-  - You can now run this on a 24GB GPU. Training will be slower.
+  - You can now run this on a GPU with 24GB of VRAM (e.g. 3090). Training will be slower, and you'll need to be sure this is the *only* program running.
   - If, like myself, you don't happen to own one of those, I'm including a Jupyter notebook here to help you run it on a rented cloud computing platform. 
   - It's currently tailored to [runpod.io](https://runpod.io?ref=n8yfwyum), but can work on vast.ai / etc.
   
