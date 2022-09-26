@@ -19,6 +19,28 @@
 - You might have better luck training with `sd-v1-4-full-ema.ckpt`
   - However, it's huge and it's annoying.
   
+# Vast.AI Instructions
+- Sign up for [Vast.AI](https://vast.ai/) 
+- Add some funds (I typically add them in $10 increments)
+- Navigate to the [Client - Create page](https://vast.ai/console/create/)
+  - Select pytorch/pytorch as your docker image, and select "Use Jupyter Lab Interface"
+  - ![img.png](readme-images/vast-ai-step1-select-docker-image.png)
+- You will want to increase your disk space, and filter on GPU RAM (12gb checkpoint files + 4gb model file + regularization images + other stuff adds up fast)
+  - I typically allocate 150GB
+  - ![img.png](readme-images/vast-ai-step2-instance-filters.png)
+  - Also good to check the Upload/Download speed for enough bandwidth so you don't spend all your money waiting for things to download.
+- Select the instance you want, and click `Rent`, then head over to your [Instances](https://vast.ai/console/instances/) page and click `Open`
+  - ![img.png](readme-images/vast-ai-step3-instances.png)
+- Click `Notebook -> Python 3` (You can do this next step a number of ways, but I typically do this)
+  - ![img.png](readme-images/vast-ai-step4-get-repo.png)
+- Clone Joe's repo with this command
+  - `!git clone https://github.com/JoePenna/Dreambooth-Stable-Diffusion.git`
+  - Click `run`
+  - ![img.png](readme-images/vast-ai-step5-clone-repo.png)
+- Navigate into the new `Dreambooth-Stable-Diffusion` directory on the left and open the `dreambooth_runpod_joepenna.ipynb` file
+  - ![img.png](readme-images/vast-ai-step6-open-notebook.png)
+- Follow the instructions in the workbook and start training
+
 # RunPod Instructions
 - Sign up for RunPod. Feel free to use my [referral link here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
 - Click **Deploy** on either `SECURE CLOUD` or `COMMUNITY CLOUD`
