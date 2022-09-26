@@ -399,7 +399,7 @@ class ImageLogger(Callback):
             grid = grid.transpose(0, 1).transpose(1, 2).squeeze(-1)
             grid = grid.numpy()
             grid = (grid * 255).astype(np.uint8)
-            filename = "{}_gs-{:06}_e-{:06}_b-{:06}.jpg".format(
+            filename = "{}_globalstep-{:05}_epoch-{:01}_batch-{:04}.jpg".format(
                 k,
                 global_step,
                 current_epoch,
@@ -806,7 +806,7 @@ if __name__ == "__main__":
         def melk(*args, **kwargs):
             # run all checkpoint hooks
             if trainer.global_rank == 0:
-                print("Summoning checkpoint.")
+                print("Here comes the checkpoint...")
                 ckpt_path = os.path.join(ckptdir, "last.ckpt")
                 trainer.save_checkpoint(ckpt_path)
 
@@ -851,4 +851,5 @@ if __name__ == "__main__":
             os.makedirs(os.path.split(dst)[0], exist_ok=True)
             os.rename(logdir, dst)
         if trainer.global_rank == 0:
+            print("Another one bites the dust...")
             print(trainer.profiler.summary())
