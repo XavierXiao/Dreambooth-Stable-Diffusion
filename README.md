@@ -12,11 +12,22 @@ The implementation makes minimum changes over the official codebase of Textual I
 ### Preparation
 First set-up the ```ldm``` enviroment following the instruction from textual inversion repo, or the original Stable Diffusion repo.
 
+```bash
+git clone https://github.com/XavierXiao/Dreambooth-Stable-Diffusion.git
+cd Dreambooth-Stable-Diffusion
+conda env create --file environment.yaml
+```
+
 To fine-tune a stable diffusion model, you need to obtain the pre-trained stable diffusion models following their [instructions](https://github.com/CompVis/stable-diffusion#stable-diffusion-v1). Weights can be downloaded on [HuggingFace](https://huggingface.co/CompVis). You can decide which version of checkpoint to use, but I use ```sd-v1-4-full-ema.ckpt```.
+
+```bash
+git lfs install
+git clone https://huggingface.co/CompVis/stable-diffusion-v-1-4-original
+```
 
 We also need to create a set of images for regularization, as the fine-tuning algorithm of Dreambooth requires that. Details of the algorithm can be found in the paper. Note that in the original paper, the regularization images seem to be generated on-the-fly. However, here I generated a set of regularization images before the training. The text prompt for generating regularization images can be ```photo of a <class>```, where ```<class>``` is a word that describes the class of your object, such as ```dog```. The command is
 
-```
+```bash
 python scripts/stable_txt2img.py --ddim_eta 0.0 --n_samples 8 --n_iter 1 --scale 10.0 --ddim_steps 50  --ckpt /path/to/original/stable-diffusion/sd-v1-4-full-ema.ckpt --prompt "a photo of a <class>" 
 ```
 
@@ -30,7 +41,7 @@ For some cases, if the generated regularization images are highly unrealistic (h
 ### Training
 Training can be done by running the following command
 
-```
+```bash
 python main.py --base configs/stable-diffusion/v1-finetune_unfrozen.yaml 
                 -t 
                 --actual_resume /path/to/original/stable-diffusion/sd-v1-4-full-ema.ckpt  
@@ -50,7 +61,7 @@ Training will be run for 800 steps, and two checkpoints will be saved at ```./lo
 ### Generation
 After training, personalized samples can be obtained by running the command
 
-```
+```bash
 python scripts/stable_txt2img.py --ddim_eta 0.0 
                                  --n_samples 8 
                                  --n_iter 1 
