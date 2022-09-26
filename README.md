@@ -1,7 +1,28 @@
 # "Dreambooth" on Stable Diffusion
 
+![image](https://user-images.githubusercontent.com/100188076/192390551-cb89364f-af57-4aed-8f3d-f9eb9b61cf95.png)
+
 ## Notes by Joe Penna
+### **INTRODUCTIONS!**
+Hi! My name is *Joe Penna*.
+
+You might have seen a few YouTube of mine under *MysteryGuitarMan*. I'm now a feature filmmaker. You might have seen [ARCTIC](https://www.youtube.com/watch?v=N5aD9ppoQIo&t=6s) or [STOWAWAY](https://www.youtube.com/watch?v=A_apvQkWsVY).
+
+For my movies, I need to be able to train specific actors, props, locations, etc. So, I did a bunch of changes to @XavierXiao's repo in order to train people's faces.
+
+I can't release all the tests for the movie I'm working on, but when I test with my own face, I release those on my Twitter page - [@MysteryGuitarM](https://twitter.com/MysteryGuitarM).
+
+Lots of these tests were done with a buddy of mine -- Niko from CorridorDigital. It might be how you found this repo!
+
+I'm not really a coder. I'm just stubborn, and I'm not afraid of googling. So, eventually, some really smart folks joined in and have been contributing. In this repo, specifically: @djbielejeski @gammagec @MrSaad –– but so many others in our Discord!
+
+Now, if you wanna try to do this... please read the warnings below first:
+
 ### **WARNINGS!**
+- **This is bleeding edge stuff**... there is currently no easy way to run this. This repo is based on a repo based on another repo.
+  - At the moment, it takes a LOT of effort to create something that's basically duct tape and bubble gum -- but eventually works SUPER well.
+  - Step in, please! Don't let that scare ya -- but please know that you're wading through the jungle at night, with no torch...
+
 - Unfreezing the model takes a lot of juice.
   - ~~You're gonna need an A6000 / A40 / A100 (or similar top-of-the-line thousands-of-dollars GPU).~~
   - You can now run this on a GPU with 24GB of VRAM (e.g. 3090). Training will be slower, and you'll need to be sure this is the *only* program running.
