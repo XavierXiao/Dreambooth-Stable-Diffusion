@@ -1,7 +1,6 @@
 import argparse, os, sys, datetime, glob, importlib, csv
 import numpy as np
 import time
-import shutil
 import torch
 
 import torchvision
@@ -19,11 +18,8 @@ from pytorch_lightning.callbacks import ModelCheckpoint, Callback, LearningRateM
 from pytorch_lightning.utilities.distributed import rank_zero_only
 from pytorch_lightning.utilities import rank_zero_info
 
-import prune_ckpt
 from ldm.data.base import Txt2ImgIterableBaseDataset
 from ldm.util import instantiate_from_config
-
-from prune_ckpt import *
 
 ## Un-comment this for windows
 ## os.environ["PL_TORCH_DISTRIBUTED_BACKEND"] = "gloo"
@@ -159,13 +155,6 @@ def get_parser(**parser_kwargs):
         required=True,
         default=1000,
         help="Number of iterations to run")
-
-    parser.add_argument(
-        "--save_checkpoints",
-        type=bool,
-        default=False,
-        help="Save checkpoint files to \"trained_models\""
-    )
 
     parser.add_argument("--actual_resume", 
         type=str,
@@ -762,12 +751,11 @@ if __name__ == "__main__":
             callbacks_cfg = OmegaConf.create()
 
         if 'metrics_over_trainsteps_checkpoint' in callbacks_cfg:
-            print(
-                'Caution: Saving checkpoints every n train steps without deleting. This might require some free space.')
+            print('Caution: Saving checkpoints every n train steps without deleting. This might require some free space.')
             default_metrics_over_trainsteps_ckpt_dict = {
-                'metrics_over_trainsteps_checkpoint':
-                    {"target": 'pytorch_lightning.callbacks.ModelCheckpoint',
-                     'params': {
+                'metrics_over_trainsteps_checkpoint': {
+                    "target": 'pytorch_lightning.callbacks.ModelCheckpoint',
+                    'params': {
                          "dirpath": os.path.join(ckptdir, 'trainstep_checkpoints'),
                          "filename": "{epoch:06}-{step:09}",
                          "verbose": True,
@@ -775,8 +763,9 @@ if __name__ == "__main__":
                          'every_n_train_steps': 10000,
                          'save_weights_only': True
                      }
-                     }
+                }
             }
+
             default_callbacks_cfg.update(default_metrics_over_trainsteps_ckpt_dict)
 
         callbacks_cfg = OmegaConf.merge(default_callbacks_cfg, callbacks_cfg)
@@ -836,22 +825,8 @@ if __name__ == "__main__":
             if trainer.global_rank == 0:
                 print("Here comes the checkpoint...")
                 ckpt_path = os.path.join(ckptdir, "last.ckpt")
-                pruned_ckpt_path = os.path.join(ckptdir, "last-pruned.ckpt")
                 trainer.save_checkpoint(ckpt_path)
-                prune_ckpt.prune_it(ckpt_path)
 
-                # remove the 12gb checkpoint file
-                os.remove(ckpt_path)
-
-                # rename the 2gb checkpoint file
-                os.rename(pruned_ckpt_path, ckpt_path)
-
-                if opt.save_checkpoints:
-                    dst = os.path.join("trained_models")
-                    os.makedirs(os.path.split(dst)[0], exist_ok=True)
-                    # Setup the checkpoint filename
-                    checkpoint_file = os.path.join(dst, int(time.time()) + "_" + trainer.global_step + "_checkpoint.ckpt")
-                    shutil.copyfile(ckpt_path, checkpoint_file)
 
         def divein(*args, **kwargs):
             if trainer.global_rank == 0:
