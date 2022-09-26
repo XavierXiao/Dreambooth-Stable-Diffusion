@@ -152,7 +152,7 @@ def get_parser(**parser_kwargs):
     parser.add_argument(
         "--batch_size",
         type=int,
-        required=True,
+        required=False,
         default=1000,
         help="Number of iterations to run")
 
