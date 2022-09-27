@@ -63,6 +63,17 @@ Same prompt for all of these images below:
 `Kate Mara`
 <br><img src="https://user-images.githubusercontent.com/100188076/192403461-1f6972d9-64d0-46b0-b2ed-737e47aae31e.png" width="200">
 
+# RunPod Instructions
+- Sign up for RunPod. Feel free to use my [referral link here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
+- Click **Deploy** on either `SECURE CLOUD` or `COMMUNITY CLOUD`
+- Click `Select` on a GPU with at least 35 GB of VRAM (e.g. A100, A40, A6000, etc)
+- Select a template > `Runpod / Stable Diffusion`
+- Click `Connect` and choose `Jupyter Lab`
+- Make a new notebook (it's just like Google Colab) and run the code below
+```python
+!git clone https://github.com/JoePenna/Dreambooth-Stable-Diffusion/
+```
+- With the file navigator on the left, `/workspace/Dreambooth-Stable-Diffusion/dreambooth_runpod_joepenna.ipynb` -- follow the instructions in there.
   
 # Vast.AI Instructions
 - Sign up for [Vast.AI](https://vast.ai/) 
@@ -85,18 +96,6 @@ Same prompt for all of these images below:
 - Navigate into the new `Dreambooth-Stable-Diffusion` directory on the left and open the `dreambooth_runpod_joepenna.ipynb` file
   - ![img.png](readme-images/vast-ai-step6-open-notebook.png)
 - Follow the instructions in the workbook and start training
-
-# RunPod Instructions
-- Sign up for RunPod. Feel free to use my [referral link here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
-- Click **Deploy** on either `SECURE CLOUD` or `COMMUNITY CLOUD`
-- Click `Select` on a GPU with at least 35 GB of VRAM (e.g. A100, A40, A6000, etc)
-- Select a template > `Runpod / Stable Diffusion`
-- Click `Connect` and choose `Jupyter Lab`
-- Make a new notebook (it's just like Google Colab) and run the code below
-```python
-!git clone https://github.com/JoePenna/Dreambooth-Stable-Diffusion/
-```
-- With the file navigator on the left, `/workspace/Dreambooth-Stable-Diffusion/dreambooth_runpod_joepenna.ipynb` -- follow the instructions in there.
 
 # Original Readme from XavierXiao
 
