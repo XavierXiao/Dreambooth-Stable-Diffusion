@@ -39,8 +39,41 @@ Now, if you wanna try to do this... please read the warnings below first:
 - There doesn't seem to be an easy way to train two subjects consecutively. You will end up with an 11-12GB.
   - I'm currently testing ways of compressing that down to ~2GB.
   
-- You might have better luck training with `sd-v1-4-full-ema.ckpt`
-  - However, it's huge and it's annoying.
+- ~~You might have better luck training with `sd-v1-4-full-ema.ckpt`~~
+  - Further testing has shown that it doesn't help.
+
+- Best practice is to change the token to a celebrity name. Here's my wife trained with the exact same settings, except for the token:
+
+The `ground truth` (real picture, caution: very beautiful woman)
+<br><img src="https://user-images.githubusercontent.com/100188076/192403948-8d1d0e50-3e9f-495f-b8ba-1bcb6b536fc8.png" width="200">
+
+Same prompt for all of these images below:
+
+`sks`
+<br><img src="https://user-images.githubusercontent.com/100188076/192403506-ab96c652-f7d0-47b0-98fa-267defa1e511.png" width="200">
+
+
+`woman`
+<br><img src="https://user-images.githubusercontent.com/100188076/192403491-cb258777-5091-4492-a6cc-82305fa729f4.png" width="200">
+
+
+`Natalie Portman`
+<br><img src="https://user-images.githubusercontent.com/100188076/192403437-f9a93720-d41c-4334-8901-fa2d2a10fe36.png" width="200">
+
+`Kate Mara`
+<br><img src="https://user-images.githubusercontent.com/100188076/192403461-1f6972d9-64d0-46b0-b2ed-737e47aae31e.png" width="200">
+
+# RunPod Instructions
+- Sign up for RunPod. Feel free to use my [referral link here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
+- Click **Deploy** on either `SECURE CLOUD` or `COMMUNITY CLOUD`
+- Click `Select` on a GPU with at least 35 GB of VRAM (e.g. A100, A40, A6000, etc)
+- Select a template > `Runpod / Stable Diffusion`
+- Click `Connect` and choose `Jupyter Lab`
+- Make a new notebook (it's just like Google Colab) and run the code below
+```python
+!git clone https://github.com/JoePenna/Dreambooth-Stable-Diffusion/
+```
+- With the file navigator on the left, `/workspace/Dreambooth-Stable-Diffusion/dreambooth_runpod_joepenna.ipynb` -- follow the instructions in there.
   
 # Vast.AI Instructions
 - Sign up for [Vast.AI](https://vast.ai/) 
@@ -63,18 +96,6 @@ Now, if you wanna try to do this... please read the warnings below first:
 - Navigate into the new `Dreambooth-Stable-Diffusion` directory on the left and open the `dreambooth_runpod_joepenna.ipynb` file
   - ![img.png](readme-images/vast-ai-step6-open-notebook.png)
 - Follow the instructions in the workbook and start training
-
-# RunPod Instructions
-- Sign up for RunPod. Feel free to use my [referral link here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
-- Click **Deploy** on either `SECURE CLOUD` or `COMMUNITY CLOUD`
-- Click `Select` on a GPU with at least 35 GB of VRAM (e.g. A100, A40, A6000, etc)
-- Select a template > `Runpod / Stable Diffusion`
-- Click `Connect` and choose `Jupyter Lab`
-- Make a new notebook (it's just like Google Colab) and run the code below
-```python
-!git clone https://github.com/JoePenna/Dreambooth-Stable-Diffusion/
-```
-- With the file navigator on the left, `/workspace/Dreambooth-Stable-Diffusion/dreambooth_runpod_joepenna.ipynb` -- follow the instructions in there.
 
 # Original Readme from XavierXiao
 
