@@ -2,6 +2,10 @@
 
 ![image](https://user-images.githubusercontent.com/100188076/192390551-cb89364f-af57-4aed-8f3d-f9eb9b61cf95.png)
 
+# Hugging Face Diffusers
+
+Dreambooth is now supported in Hugging Face diffusers for training with stable diffusion, try it out in the colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/huggingface/notebooks/blob/main/diffusers/sd_dreambooth_training.ipynb)
+
 # Easy RunPod Instructions
 - Sign up for RunPod. Feel free to use my [referral link here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
 - Click **Deploy** on either `SECURE CLOUD` or `COMMUNITY CLOUD`
