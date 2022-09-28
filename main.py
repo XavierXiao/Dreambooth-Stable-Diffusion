@@ -150,7 +150,7 @@ def get_parser(**parser_kwargs):
         help="Prepend the final directory in the data_root to the output directory name")
 
     parser.add_argument(
-        "--max_steps",
+        "--max_training_steps",
         type=int,
         required=False,
         default=1000,
@@ -773,7 +773,7 @@ if __name__ == "__main__":
             del callbacks_cfg['ignore_keys_callback']
 
         trainer_kwargs["callbacks"] = [instantiate_from_config(callbacks_cfg[k]) for k in callbacks_cfg]
-        trainer_kwargs["max_steps"] = trainer_opt.max_steps
+        trainer_kwargs["max_steps"] = trainer_opt.max_training_steps
 
         trainer = Trainer.from_argparse_args(trainer_opt, **trainer_kwargs)
         trainer.logdir = logdir  ###
