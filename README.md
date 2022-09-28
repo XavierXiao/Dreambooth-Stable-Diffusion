@@ -15,6 +15,14 @@
 # "Dreambooth" on Stable Diffusion
 ![image](https://user-images.githubusercontent.com/100188076/192390551-cb89364f-af57-4aed-8f3d-f9eb9b61cf95.png)
 
+# Hugging Face Diffusers - Alternate Option
+
+Note: This is a diffuser implementation, and use is much more complicated than using a *.ckpy file.
+
+Dreambooth is now supported in Hugging Face diffusers for training with stable diffusion, try it out in the colab:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/huggingface/notebooks/blob/main/diffusers/sd_dreambooth_training.ipynb)
+
 
 ## <a name="notes-by-joe-penna"></a>  Notes by Joe Penna
 ### **INTRODUCTIONS!**
