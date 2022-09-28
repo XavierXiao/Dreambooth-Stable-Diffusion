@@ -66,7 +66,7 @@ Now, if you wanna try to do this... please read the warnings below first:
 - Sign up for [Vast.AI](https://vast.ai/)
 - Add some funds (I typically add them in $10 increments)
 - Navigate to the [Client - Create page](https://vast.ai/console/create/)
-  - Select pytorch/pytorch as your docker image, and select "Use Jupyter Lab Interface"
+  - Select pytorch/pytorch as your docker image, and the buttons "Use Jupyter Lab Interface" and "Jupyter direct HTTPS"
   - ![img.png](readme-images/vast-ai-step1-select-docker-image.png)
 - You will want to increase your disk space, and filter on GPU RAM (12gb checkpoint files + 4gb model file + regularization images + other stuff adds up fast)
   - I typically allocate 150GB
@@ -74,6 +74,7 @@ Now, if you wanna try to do this... please read the warnings below first:
   - Also good to check the Upload/Download speed for enough bandwidth so you don't spend all your money waiting for things to download.
 - Select the instance you want, and click `Rent`, then head over to your [Instances](https://vast.ai/console/instances/) page and click `Open`
   - ![img.png](readme-images/vast-ai-step3-instances.png)
+  - You will get an unsafe certificate warning. Click past the warning or install the [Vast cert](https://vast.ai/static/jvastai_root.cer).
 - Click `Notebook -> Python 3` (You can do this next step a number of ways, but I typically do this)
   - ![img.png](readme-images/vast-ai-step4-get-repo.png)
 - Clone Joe's repo with this command
