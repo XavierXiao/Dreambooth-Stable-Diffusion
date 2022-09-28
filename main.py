@@ -150,7 +150,7 @@ def get_parser(**parser_kwargs):
         help="Prepend the final directory in the data_root to the output directory name")
 
     parser.add_argument(
-        "--batch_size",
+        "--max_steps",
         type=int,
         required=False,
         default=1000,
@@ -620,7 +620,7 @@ if __name__ == "__main__":
         trainer_config = lightning_config.get("trainer", OmegaConf.create())
 
         # Set the steps
-        trainer_config.max_steps = opt.batch_size
+        trainer_config.max_steps = opt.max_steps
 
         for k in nondefault_trainer_args(opt):
             trainer_config[k] = getattr(opt, k)
