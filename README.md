@@ -9,20 +9,12 @@
   - [They don't look like you at all!](#they-dont-look-like-you)
   - [They sorta look like you, but exactly like your training images](#they-sorta-look-like-you-but-exactly-like-your-training-images)
   - [They look like you, but not when you try different styles](#they-look-like-you-but-not-when-you-try-different-styles)
+- [Hugging Face Diffusers](#hugging-face-diffusers)
 - [Original Readme From Xavier Xiao](#original-readme-from-xavierxiao)
 
 
 # "Dreambooth" on Stable Diffusion
 ![image](https://user-images.githubusercontent.com/100188076/192390551-cb89364f-af57-4aed-8f3d-f9eb9b61cf95.png)
-
-# Hugging Face Diffusers - Alternate Option
-
-Note: This is a diffuser implementation, and use is much more complicated than using a *.ckpy file.
-
-Dreambooth is now supported in Hugging Face diffusers for training with stable diffusion, try it out in the colab:
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/huggingface/notebooks/blob/main/diffusers/sd_dreambooth_training.ipynb)
-
 
 ## <a name="notes-by-joe-penna"></a>  Notes by Joe Penna
 ### **INTRODUCTIONS!**
@@ -183,7 +175,18 @@ No problem. We can fix that with the prompt:
 
 `JoePenna person in a portrait photograph, JoePenna person in a 85mm medium format photo of JoePenna person`
 
+
 ### More tips and help here: [Stable Diffusion Dreambooth Discord](https://discord.com/channels/1023277529424986162/1024716296610385981)
+
+# <a name="hugging-face-diffusers"></a> Hugging Face Diffusers - Alternate Option
+
+Note: This is a diffuser implementation, and use is much more complicated than using a *.ckpy file.
+
+Dreambooth is now supported in Hugging Face diffusers for training with stable diffusion, try it out in the colab:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/huggingface/notebooks/blob/main/diffusers/sd_dreambooth_training.ipynb)
+
+
 
 # <a name="original-readme-from-xavierxiao"></a> Original Readme from XavierXiao
 
