@@ -48,24 +48,53 @@ Now, if you wanna try to do this... please read the warnings below first:
   
 - Best practice is to change the token to a celebrity name. Here's my wife trained with the exact same settings, except for the token:
 
+# Using the generated model
 The `ground truth` (real picture, caution: very beautiful woman)
 <br><img src="https://user-images.githubusercontent.com/100188076/192403948-8d1d0e50-3e9f-495f-b8ba-1bcb6b536fc8.png" width="200">
 
 Same prompt for all of these images below:
 
-`sks`
-<br><img src="https://user-images.githubusercontent.com/100188076/192403506-ab96c652-f7d0-47b0-98fa-267defa1e511.png" width="200">
+| `sks` | `woman` | `Natalie Portman` | `Kate Mara` |
+| ----- | ------- | ----------------- | ----------- |
+| <img src="https://user-images.githubusercontent.com/100188076/192403506-ab96c652-f7d0-47b0-98fa-267defa1e511.png" width="200"> | <img src="https://user-images.githubusercontent.com/100188076/192403491-cb258777-5091-4492-a6cc-82305fa729f4.png" width="200"> | <img src="https://user-images.githubusercontent.com/100188076/192403437-f9a93720-d41c-4334-8901-fa2d2a10fe36.png" width="200"> | <img src="https://user-images.githubusercontent.com/100188076/192403461-1f6972d9-64d0-46b0-b2ed-737e47aae31e.png" width="200"> |   
+
+## Debugging your results
+Oh no!
+
+You're not getting good generations!
+
+----
+#### OPTION 1: They're not looking like you at all!
+
+Are you sure you're prompting it right?
+
+It should be `<token> <class>`, not just `<token>`. For example:
+
+`JoePenna person, portrait photograph, 85mm medium format photo`
 
 
-`woman`
-<br><img src="https://user-images.githubusercontent.com/100188076/192403491-cb258777-5091-4492-a6cc-82305fa729f4.png" width="200">
+If it still doesn't look like you, you didn't train long enough.
+
+----
+
+#### OPTION 2: They're looking like you, but are all looking like your training images.
+
+Okay, a few reasons why: you might have trained too long... or your images were too similar... or you didn't train with enough images.
+
+No problem. We can fix that with the prompt. Stable Diffusion puts a LOT of merit to whatever you type first. So save it for later:
+
+`an exquisite portrait photograph, 85mm medium format photo of JoePenna person with a classic haircut`
 
 
-`Natalie Portman`
-<br><img src="https://user-images.githubusercontent.com/100188076/192403437-f9a93720-d41c-4334-8901-fa2d2a10fe36.png" width="200">
+----
 
-`Kate Mara`
-<br><img src="https://user-images.githubusercontent.com/100188076/192403461-1f6972d9-64d0-46b0-b2ed-737e47aae31e.png" width="200">
+#### OPTION 3: They're looking like you, but not when you try different styles.
+
+You didn't train long enough...
+
+No problem. We can fix that with the prompt:
+
+`JoePenna person in a portrait photograph, JoePenna person in a 85mm medium format photo of JoePenna person`
 
 # Vast.AI Instructions
 - Sign up for [Vast.AI](https://vast.ai/) 
