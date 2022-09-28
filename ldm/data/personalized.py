@@ -8,7 +8,7 @@ from torchvision import transforms
 import random
 
 training_templates_smallest = [
-    'demoura {}',
+    'joepenna {}',
 ]
 
 reg_templates_smallest = [
@@ -28,6 +28,7 @@ per_img_token_list = [
     'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'כ', 'ל', 'מ', 'נ', 'ס', 'ע', 'פ', 'צ', 'ק', 'ר', 'ש', 'ת',
 ]
 
+
 class PersonalizedBase(Dataset):
     def __init__(self,
                  data_root,
@@ -41,16 +42,17 @@ class PersonalizedBase(Dataset):
                  center_crop=False,
                  mixing_prob=0.25,
                  coarse_class_text=None,
-                 reg = False
+                 reg=False
                  ):
 
         self.data_root = data_root
 
-        self.image_paths = [os.path.join(self.data_root, file_path) for file_path in os.listdir(self.data_root)]
+        self.image_paths = [os.path.join(
+            self.data_root, file_path) for file_path in os.listdir(self.data_root)]
 
         # self._length = len(self.image_paths)
         self.num_images = len(self.image_paths)
-        self._length = self.num_images 
+        self._length = self.num_images
 
         self.placeholder_token = placeholder_token
 
@@ -61,7 +63,8 @@ class PersonalizedBase(Dataset):
         self.coarse_class_text = coarse_class_text
 
         if per_image_tokens:
-            assert self.num_images < len(per_img_token_list), f"Can't use per-image tokens when the training set contains more than {len(per_img_token_list)} tokens. To enable larger sets, add more tokens to 'per_img_token_list'."
+            assert self.num_images < len(
+                per_img_token_list), f"Can't use per-image tokens when the training set contains more than {len(per_img_token_list)} tokens. To enable larger sets, add more tokens to 'per_img_token_list'."
 
         if set == "train":
             self._length = self.num_images * repeats
@@ -90,24 +93,27 @@ class PersonalizedBase(Dataset):
             placeholder_string = f"{self.coarse_class_text} {placeholder_string}"
 
         if not self.reg:
-            text = random.choice(training_templates_smallest).format(placeholder_string)
+            text = random.choice(training_templates_smallest).format(
+                placeholder_string)
         else:
-            text = random.choice(reg_templates_smallest).format(placeholder_string)
-            
+            text = random.choice(reg_templates_smallest).format(
+                placeholder_string)
+
         example["caption"] = text
 
         # default to score-sde preprocessing
         img = np.array(image).astype(np.uint8)
-        
+
         if self.center_crop:
             crop = min(img.shape[0], img.shape[1])
             h, w, = img.shape[0], img.shape[1]
             img = img[(h - crop) // 2:(h + crop) // 2,
-                (w - crop) // 2:(w + crop) // 2]
+                      (w - crop) // 2:(w + crop) // 2]
 
         image = Image.fromarray(img)
         if self.size is not None:
-            image = image.resize((self.size, self.size), resample=self.interpolation)
+            image = image.resize((self.size, self.size),
+                                 resample=self.interpolation)
 
         image = self.flip(image)
         image = np.array(image).astype(np.uint8)
