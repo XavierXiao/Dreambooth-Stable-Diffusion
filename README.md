@@ -1,15 +1,22 @@
-# "Dreambooth" on Stable Diffusion
+# Index
 
+- [Notes by Joe Penna](#notes-by-joe-penna)
+- [Setup](#setup)
+  - [Easy RunPod Instructions](#easy-runpod-instructions)
+  - [Vast.AI Setup](#vast-ai-setup)
+- [Using the Generated Model](#using-the-generated-model)
+- [Debugging Your Results](#debugging-your-results)
+  - [They don't look like you at all!](#they-dont-look-like-you)
+  - [They sorta look like you, but exactly like your training images](#they-sorta-look-like-you-but-exactly-like-your-training-images)
+  - [They look like you, but not when you try different styles](#they-look-like-you-but-not-when-you-try-different-styles)
+- [Original Readme From Xavier Xiao](#original-readme-from-xavierxiao)
+
+
+# "Dreambooth" on Stable Diffusion
 ![image](https://user-images.githubusercontent.com/100188076/192390551-cb89364f-af57-4aed-8f3d-f9eb9b61cf95.png)
 
-# Easy RunPod Instructions
-- Sign up for RunPod. Feel free to use my [referral link here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
-- Click **Deploy** on either `SECURE CLOUD` or `COMMUNITY CLOUD`
-- Follow these video instructions here:
 
-[![VIDEO INSTRUCTIONS](https://img.youtube.com/vi/7m__xadX0z0/0.jpg)](https://www.youtube.com/watch?v=7m__xadX0z0#t=5m33.1s)
-
-## Notes by Joe Penna
+## <a name="notes-by-joe-penna"></a>  Notes by Joe Penna
 ### **INTRODUCTIONS!**
 Hi! My name is Joe Penna.
 
@@ -36,68 +43,29 @@ Now, if you wanna try to do this... please read the warnings below first:
   - ~~You're gonna need an A6000 / A40 / A100 (or similar top-of-the-line thousands-of-dollars GPU).~~
   - You can now run this on a GPU with 24GB of VRAM (e.g. 3090). Training will be slower, and you'll need to be sure this is the *only* program running.
   - If, like myself, you don't happen to own one of those, I'm including a Jupyter notebook here to help you run it on a rented cloud computing platform. 
-  - It's currently tailored to [runpod.io](https://runpod.io?ref=n8yfwyum), but can work on vast.ai / etc.
+  - It's currently tailored to [runpod.io](https://runpod.io?ref=n8yfwyum), but can work on [vast.ai](#vast-ai-setup) / etc.
   
 - This implementation does not fully implement Google's ideas on how to preserve the latent space.
 
   - Most images that are similar to what you're training will be shifted towards that.
-  - e.g. If you're training a person, all people will look like you. If you're trianing an object, anything in that class will look like your object.
+  - e.g. If you're training a person, all people will look like you. If you're training an object, anything in that class will look like your object.
 
-- There doesn't seem to be an easy way to train two subjects consecutively. You will end up with an 11-12GB.
-  - I'm currently testing ways of compressing that down to ~2GB.
+- There doesn't seem to be an easy way to train two subjects consecutively. You will end up with an `11-12GB` file before pruning.
+  - The provided notebook has a pruner that crunches it down to `~2gb`
   
-- Best practice is to change the token to a celebrity name. Here's my wife trained with the exact same settings, except for the token:
-
-# Using the generated model
-The `ground truth` (real picture, caution: very beautiful woman)
-<br><img src="https://user-images.githubusercontent.com/100188076/192403948-8d1d0e50-3e9f-495f-b8ba-1bcb6b536fc8.png" width="200">
-
-Same prompt for all of these images below:
-
-| `sks` | `woman` | `Natalie Portman` | `Kate Mara` |
-| ----- | ------- | ----------------- | ----------- |
-| <img src="https://user-images.githubusercontent.com/100188076/192403506-ab96c652-f7d0-47b0-98fa-267defa1e511.png" width="200"> | <img src="https://user-images.githubusercontent.com/100188076/192403491-cb258777-5091-4492-a6cc-82305fa729f4.png" width="200"> | <img src="https://user-images.githubusercontent.com/100188076/192403437-f9a93720-d41c-4334-8901-fa2d2a10fe36.png" width="200"> | <img src="https://user-images.githubusercontent.com/100188076/192403461-1f6972d9-64d0-46b0-b2ed-737e47aae31e.png" width="200"> |   
-
-## Debugging your results
-Oh no!
-
-You're not getting good generations!
-
-----
-#### OPTION 1: They're not looking like you at all!
-
-Are you sure you're prompting it right?
-
-It should be `<token> <class>`, not just `<token>`. For example:
-
-`JoePenna person, portrait photograph, 85mm medium format photo`
+- Best practice is to change the token to a celebrity name. Here's [my wife trained with the exact same settings, except for the token](#using-the-generated-model)
 
 
-If it still doesn't look like you, you didn't train long enough.
+# <a name="setup"></a> Setup
+## <a name="easy-runpod-instructions"></a> Easy RunPod Instructions
+- Sign up for RunPod. Feel free to use my [referral link here](https://runpod.io?ref=n8yfwyum), so that I don't have to pay for it (but you do).
+- Click **Deploy** on either `SECURE CLOUD` or `COMMUNITY CLOUD`
+- Follow these video instructions here:
 
-----
+[![VIDEO INSTRUCTIONS](https://img.youtube.com/vi/7m__xadX0z0/0.jpg)](https://www.youtube.com/watch?v=7m__xadX0z0#t=5m33.1s)
 
-#### OPTION 2: They're looking like you, but are all looking like your training images.
-
-Okay, a few reasons why: you might have trained too long... or your images were too similar... or you didn't train with enough images.
-
-No problem. We can fix that with the prompt. Stable Diffusion puts a LOT of merit to whatever you type first. So save it for later:
-
-`an exquisite portrait photograph, 85mm medium format photo of JoePenna person with a classic haircut`
-
-
-----
-
-#### OPTION 3: They're looking like you, but not when you try different styles.
-
-You didn't train long enough...
-
-No problem. We can fix that with the prompt:
-
-`JoePenna person in a portrait photograph, JoePenna person in a 85mm medium format photo of JoePenna person`
-
-# Vast.AI Instructions
-- Sign up for [Vast.AI](https://vast.ai/) 
+## <a name="vast-ai-setup"></a>  Vast.AI Instructions
+- Sign up for [Vast.AI](https://vast.ai/)
 - Add some funds (I typically add them in $10 increments)
 - Navigate to the [Client - Create page](https://vast.ai/console/create/)
   - Select pytorch/pytorch as your docker image, and select "Use Jupyter Lab Interface"
@@ -118,7 +86,98 @@ No problem. We can fix that with the prompt:
   - ![img.png](readme-images/vast-ai-step6-open-notebook.png)
 - Follow the instructions in the workbook and start training
 
-# Original Readme from XavierXiao
+
+# <a name="using-the-generated-model"></a> Using the generated model
+The `ground truth` (real picture, caution: very beautiful woman)
+<br><img src="https://user-images.githubusercontent.com/100188076/192403948-8d1d0e50-3e9f-495f-b8ba-1bcb6b536fc8.png" width="200">
+
+Same prompt for all of these images below:
+
+| `sks` | `woman` | `Natalie Portman` | `Kate Mara` |
+| ----- | ------- | ----------------- | ----------- |
+| <img src="https://user-images.githubusercontent.com/100188076/192403506-ab96c652-f7d0-47b0-98fa-267defa1e511.png" width="200"> | <img src="https://user-images.githubusercontent.com/100188076/192403491-cb258777-5091-4492-a6cc-82305fa729f4.png" width="200"> | <img src="https://user-images.githubusercontent.com/100188076/192403437-f9a93720-d41c-4334-8901-fa2d2a10fe36.png" width="200"> | <img src="https://user-images.githubusercontent.com/100188076/192403461-1f6972d9-64d0-46b0-b2ed-737e47aae31e.png" width="200"> |   
+
+# <a name="debugging-your-results"></a> Debugging your results
+### ❗❗ THE NUMBER ONE MISTAKE PEOPLE MAKE ❗❗
+
+**Prompting with just your token. ie "joepenna" instead of "joepenna person"**
+
+
+If you trained with `joepenna` under the class `person`, the model should only know your face as:
+
+```
+joepenna person
+```
+
+Example Prompts:
+
+🚫 Incorrect (missing `person` following `joepenna`)
+```
+portrait photograph of joepenna 35mm film vintage glass
+```
+
+✅ This is right (`person` is included after `joepenna`)
+```
+portrait photograph of joepenna person 35mm film vintage glass
+```
+
+You might sometimes get someone who kinda looks like you with joepenna (especially if you trained for too many steps), but that's only because this current iteration of Dreambooth overtrains that token so much that it bleeds into that token.
+
+---
+
+#### ☢ Be careful with the types of images you train
+
+While training, Stable doesn't know that you're a person. It's just going to mimic what it sees.
+
+So, if these are your training images look like this:
+
+![](readme-images/caution-training.png)
+
+You're only going to get generations of you outside next to a spiky tree, wearing a white-and-gray shirt, in the style of... well, selfie photograph.
+
+Instead, this training set is much better:
+
+![](readme-images/better-training-images.png)
+
+The only thing that is consistent between images is the subject. So, Stable will look through the images and learn only your face, which will make "editing" it into other styles possible.
+
+## Oh no! You're not getting good generations!
+
+#### <a name="they-dont-look-like-you"></a> OPTION 1: They're not looking like you at all! (Train longer, or get better training images)
+
+Are you sure you're prompting it right?
+
+It should be `<token> <class>`, not just `<token>`. For example:
+
+`JoePenna person, portrait photograph, 85mm medium format photo`
+
+
+If it still doesn't look like you, you didn't train long enough.
+
+----
+
+#### <a name="they-sorta-look-like-you-but-exactly-like-your-training-images"></a> OPTION 2: They're looking like you, but are all looking like your training images. (Train for less steps, get better training images, fix with prompting)
+
+Okay, a few reasons why: you might have trained too long... or your images were too similar... or you didn't train with enough images.
+
+No problem. We can fix that with the prompt. Stable Diffusion puts a LOT of merit to whatever you type first. So save it for later:
+
+`an exquisite portrait photograph, 85mm medium format photo of JoePenna person with a classic haircut`
+
+
+----
+
+#### <a name="they-look-like-you-but-not-when-you-try-different-styles"></a> OPTION 3: They're looking like you, but not when you try different styles. (Train longer, get better training images)
+
+You didn't train long enough...
+
+No problem. We can fix that with the prompt:
+
+`JoePenna person in a portrait photograph, JoePenna person in a 85mm medium format photo of JoePenna person`
+
+### More tips and help here: [Stable Diffusion Dreambooth Discord](https://discord.com/channels/1023277529424986162/1024716296610385981)
+
+# <a name="original-readme-from-xavierxiao"></a> Original Readme from XavierXiao
 
 This is an implementtaion of Google's [Dreambooth](https://arxiv.org/abs/2208.12242) with [Stable Diffusion](https://github.com/CompVis/stable-diffusion). The original Dreambooth is based on [Imagen](https://imagen.research.google/) text-to-image model. However, neither the model nor the pre-trained weights of Imagen is available. To enable people to fine-tune a text-to-image model with a few examples, I implemented the idea of Dreambooth on Stable diffusion.
 
