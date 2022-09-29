@@ -100,9 +100,15 @@ A few bits about regularization images were added that we all thought were super
 ...and with completely blank regularization images:
 <br><img src="https://media.discordapp.net/attachments/1023293330601287711/1024933371102629898/IMG_7579.JPG" width="200">
 
-So, because regularization has no effect, this isn't Dreambooth at all.
+And here's what `"photograph of an apple"` looks like with this code:
+<br><img src="https://media.discordapp.net/attachments/1018943815370952855/1018946569850069052/unknown.png" width="200">
 
-This repo is more accurately called *"Unfrozen Model Textual Inversion for Stable Diffusion"*.
+We're not realizing the "regularization class" bits of this code have no effect, and that there is little to no prior preservation loss.
+
+So, out of respect to both the MIT team and the Google researchers, I'm renaming this fork to:
+*"Unfrozen Model Textual Inversion for Stable Diffusion"*.
+
+For an alternate implementation that attempt prior loss preservation, please see ["Alternate Option"](#hugging-face-diffusers) below.
 
 
 # <a name="using-the-generated-model"></a> Using the generated model
