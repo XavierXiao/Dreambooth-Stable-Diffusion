@@ -108,7 +108,7 @@ We're not realizing the "regularization class" bits of this code have no effect,
 So, out of respect to both the MIT team and the Google researchers, I'm renaming this fork to:
 *"Unfrozen Model Textual Inversion for Stable Diffusion"*.
 
-For an alternate implementation that attempt prior loss preservation, please see ["Alternate Option"](#hugging-face-diffusers) below.
+For an alternate implementation that attempts prior loss preservation, please see ["Alternate Option"](#hugging-face-diffusers) below.
 
 
 # <a name="using-the-generated-model"></a> Using the generated model
