@@ -100,7 +100,7 @@ A few bits about regularization images were added that we all thought were super
 ...and with completely blank regularization images:
 <br><img src="https://media.discordapp.net/attachments/1023293330601287711/1024933371102629898/IMG_7579.JPG" width="200">
 
-And here's what `"photograph of an apple"` looks like with this code:
+And here's what `"photograph of an apple"` looked like before I messed with code a bit:
 <br><img src="https://media.discordapp.net/attachments/1018943815370952855/1018946569850069052/unknown.png" width="200">
 
 We're not realizing the "regularization class" bits of this code have no effect, and that there is little to no prior preservation loss.
