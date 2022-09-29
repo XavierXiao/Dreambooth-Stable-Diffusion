@@ -11,7 +11,7 @@
   - [They look like you, but not when you try different styles](#they-look-like-you-but-not-when-you-try-different-styles)
 - [Hugging Face Diffusers](#hugging-face-diffusers)
 
-# "Dreambooth" on Stable Diffusion
+# "Dreambooth" Textual Inversion for Stable Diffusion
 ![image](https://user-images.githubusercontent.com/100188076/192390551-cb89364f-af57-4aed-8f3d-f9eb9b61cf95.png)
 
 ## <a name="notes-by-joe-penna"></a>  Notes by Joe Penna
