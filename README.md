@@ -200,7 +200,7 @@ No problem. We can fix that with the prompt:
 `JoePenna person in a portrait photograph, JoePenna person in a 85mm medium format photo of JoePenna person`
 
 
-### More tips and help here: [Stable Diffusion Dreambooth Discord](https://discord.com/channels/1023277529424986162/1024716296610385981)
+### More tips and help here: [Stable Diffusion Dreambooth Discord](https://discord.com/invite/qbMuXBXyHA)
 
 # <a name="hugging-face-diffusers"></a> Hugging Face Diffusers - Alternate Option
 
