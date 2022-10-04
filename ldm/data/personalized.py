@@ -7,27 +7,9 @@ from torchvision import transforms
 
 import random
 
-training_templates_smallest = [
-    'joepenna {}',
-]
-
-reg_templates_smallest = [
-    '{}',
-]
-
-imagenet_templates_small = [
-
-    '{}',
-]
-
-imagenet_dual_templates_small = [
-    '{} with {}'
-]
-
 per_img_token_list = [
     'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'כ', 'ל', 'מ', 'נ', 'ס', 'ע', 'פ', 'צ', 'ק', 'ר', 'ש', 'ת',
 ]
-
 
 class PersonalizedBase(Dataset):
     def __init__(self,
@@ -35,13 +17,13 @@ class PersonalizedBase(Dataset):
                  size=None,
                  repeats=100,
                  interpolation="bicubic",
-                 flip_p=0.0,
+                 flip_p=0.5,
                  set="train",
                  placeholder_token="dog",
                  per_image_tokens=False,
                  center_crop=False,
                  mixing_prob=0.25,
-                 coarse_class_text=None,
+                 coarse_class_text="",
                  reg=False
                  ):
 
@@ -88,18 +70,7 @@ class PersonalizedBase(Dataset):
         if not image.mode == "RGB":
             image = image.convert("RGB")
 
-        placeholder_string = self.placeholder_token
-        if self.coarse_class_text:
-            placeholder_string = f"{self.coarse_class_text} {placeholder_string}"
-
-        if not self.reg:
-            text = random.choice(training_templates_smallest).format(
-                placeholder_string)
-        else:
-            text = random.choice(reg_templates_smallest).format(
-                placeholder_string)
-
-        example["caption"] = text
+        example["caption"] = self.placeholder_token + self.coarse_class_text
 
         # default to score-sde preprocessing
         img = np.array(image).astype(np.uint8)
