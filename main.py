@@ -152,9 +152,8 @@ def get_parser(**parser_kwargs):
     parser.add_argument(
         "--max_training_steps",
         type=int,
-        required=False,
-        default=1000,
-        help="Number of iterations to run")
+        required=True,
+        help="Number of training steps to run")
 
     parser.add_argument(
         "--token",
