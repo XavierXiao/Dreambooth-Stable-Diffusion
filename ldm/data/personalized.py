@@ -71,7 +71,7 @@ class PersonalizedBase(Dataset):
         if self.reg:
             example["caption"] = self.coarse_class_text
         else:
-            example["caption"] = self.placeholder_token + self.coarse_class_text
+            example["caption"] = self.placeholder_token + " " + self.coarse_class_text
 
 
         # default to score-sde preprocessing
