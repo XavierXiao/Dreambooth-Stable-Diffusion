@@ -183,9 +183,9 @@ def get_parser(**parser_kwargs):
         help="Initialize embedding manager from a checkpoint")
 
     parser.add_argument("--class_word", 
-        type=str, 
-        default="dog",
-        help="Placeholder token which will be used to denote the concept in future prompts")
+        type=str,
+        required=True,
+        help="Match class_word to the category of images you want to train. Example: 'man', 'woman', or 'dog'.")
 
     parser.add_argument("--init_word", 
         type=str, 
