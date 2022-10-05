@@ -272,12 +272,12 @@ def main():
                     grid = rearrange(grid, 'n b c h w -> (n b) c h w')
                     
                     for i in range(grid.size(0)):
-                        save_image(grid[i, :, :, :], os.path.join(outpath,opt.prompt+'_{}.png'.format(i)))
+                        save_image(grid[i, :, :, :], os.path.join(outpath,opt.prompt[:30]+'_{}.png'.format(i)))
                     grid = make_grid(grid, nrow=n_rows)
 
                     # to image
                     grid = 255. * rearrange(grid, 'c h w -> h w c').cpu().numpy()
-                    Image.fromarray(grid.astype(np.uint8)).save(os.path.join(outpath, f'{prompt.replace(" ", "-")}-{grid_count:04}.jpg'))
+                    Image.fromarray(grid.astype(np.uint8)).save(os.path.join(outpath, f'{prompt.replace(" ", "-")[:30]}-{grid_count:04}.jpg'))
                     grid_count += 1
                     
                     
