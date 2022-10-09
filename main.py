@@ -21,6 +21,9 @@ from pytorch_lightning.utilities import rank_zero_info
 from ldm.data.base import Txt2ImgIterableBaseDataset
 from ldm.util import instantiate_from_config
 
+if sys.platform == "win32":
+    os.environ["PL_TORCH_DISTRIBUTED_BACKEND"] = "gloo"
+
 def load_model_from_config(config, ckpt, verbose=False):
     print(f"Loading model from {ckpt}")
     pl_sd = torch.load(ckpt, map_location="cpu")
